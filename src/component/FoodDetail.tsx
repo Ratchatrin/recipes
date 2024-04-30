@@ -23,10 +23,16 @@ interface state {
 
 function FoodDetail() {
   const foodId = useSelector((state: state) => state.user.idProduct);
-  const [foodDetail, setFoodDetail] = useState([]);
+  const [foodDetail, setFoodDetail] = useState<detail[]>([]);
   const getData = async () => {
-    const data = await axios.get(`https://dummyjson.com/recipes/${foodId}`);
-    setFoodDetail([data.data]);
+    try {
+      const data = (await axios.get(`https://dummyjson.com/recipes/${foodId}`))
+        .data;
+      setFoodDetail([data]);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
   useEffect(() => {
     getData();
