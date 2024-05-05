@@ -7,17 +7,19 @@ import { useDispatch } from "react-redux";
 import { getId } from "./component/redux/slicer";
 import { Link } from "react-router-dom";
 import HomeXl from "./component/HomeXl";
+import "./component/home.css";
 interface detail {
   id: number;
   image: string;
   name: string;
-  rating: string;
+  rating: number;
   difficulty: string;
   cuisine: string;
   caloriesPerServing: string;
   ingredients: string[];
   instructions: string[];
   tags: string[];
+  isFavorite: boolean;
 }
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -26,6 +28,10 @@ function App() {
   const [selectCuisine, setSelectCuisine] = useState<string>("");
   const [filterRecipes, setFilterRecipes] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+  const [search, setSearch] = useState<string>("");
+  // const [searchBy, setSearchBy] = useState<string>("");
+  const [resultSearch, setResultSearch] = useState<detail[]>([]);
+  // const [level, setLevel] = useState<string>("");
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -38,7 +44,6 @@ function App() {
   const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
   };
-
   useEffect(() => {
     const filter = recipes.map((detail: detail) => {
       return detail.cuisine;
@@ -57,27 +62,48 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+  useEffect(() => {
+    setResultSearch([]);
+    recipes.map((detail: detail) => {
+      detail.tags.map((tag) => {
+        if (tag.toLocaleLowerCase() === search) {
+          setResultSearch((result) => {
+            return [...result, detail];
+          });
+        }
+      });
+    });
+  }, [recipes, search]);
+  // useEffect(() => {
+  //   setResultSearch([]);
+  //   recipes.map((detail: detail) => {
+  //     if (detail.difficulty === level) {
+  //       setResultSearch((result) => {
+  //         return [...result, detail];
+  //       });
+  //     }
+  //   });
+  // }, [level, recipes]);
   return (
-    <div className="flex flex-col justify-between items-center h-full w-full">
-      <div
-        onClick={() => {
-          setShowFilter(false);
-        }}
-      >
-        <Nav></Nav>
-      </div>
-
+    <div className="h-full flex flex-col justify-start items-center">
       {windowWidth < 1024 ? (
         <>
+          <div
+            onClick={() => {
+              setShowFilter(false);
+            }}
+          >
+            <Nav></Nav>
+          </div>
           {!showFilter ? (
             <>
-              <div className="w-full flex flex-col items-center justify-center">
+              <div className="w-11/12 flex flex-col items-center justify-center">
                 <div className=" flex justify-start items-start ">
                   <details className="dropdown ">
-                    <summary className="m-1 btn bg-slate-400 text-slate-950">
-                      Sort By Cuisine
+                    <summary className="m-1 btn bg-slate-300 text-slate-950 font-bold">
+                      Cuisine
                     </summary>
-                    <ul className="p-2 shadow menu dropdown-content z-[1] bg-slate-400 text-slate-950 rounded-box w-52">
+                    <ul className="p-2 shadow menu dropdown-content z-[1] bg-slate-300 text-slate-950 rounded-box w-52">
                       {cuisine.map((detail) => {
                         return (
                           <>
@@ -87,6 +113,7 @@ function App() {
                                   setSelectCuisine(detail);
                                   setShowFilter(!showFilter);
                                 }}
+                                className="font-bold"
                               >
                                 {detail}
                               </p>
@@ -96,55 +123,286 @@ function App() {
                       })}
                     </ul>
                   </details>
+                  <Link to="/fav">
+                    <button className="btn btn-active btn-secondary m-1">
+                      Favorite Recipe
+                    </button>
+                  </Link>
                 </div>
+                {/* <div>
+                  <label className="form-control w-full">
+                    <div className="label">
+                      <span className="label-text"></span>
+                    </div>
+                    <select
+                      className="select select-bordered"
+                      onChange={(ev) => {
+                        setSearchBy(ev.target.value);
+                        setResultSearch([]);
+                      }}
+                    >
+                      <option selected disabled>
+                        Search By
+                      </option>
+                      <option>Recipes</option>
+                      <option>Level</option>
+                    </select>
+                  </label>
+                </div> */}
+                <label className="form-control w-full max-w-xs mt-3">
+                  <input
+                    type="text"
+                    placeholder="Search Recipes"
+                    className="input input-bordered w-full max-w-xs"
+                    onChange={(ev) => {
+                      setSearch(ev.target.value);
+                    }}
+                  />
+                </label>
+                {search === "" ? (
+                  <></>
+                ) : (
+                  <>
+                    {resultSearch.length === 0 ? (
+                      <>
+                        <div className="bg-gray-700 text-slate-200 w-11/12 p-5 text-center absolute top-40 mt-3 rounded-b-xl">
+                          <p>Not Found :(</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-11/12  z-0 absolute top-40 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+                          {resultSearch.map((result: detail) => {
+                            return (
+                              <>
+                                <Link to="/detail">
+                                  <div
+                                    onClick={() => {
+                                      dispatch(getId(result.id));
+                                    }}
+                                    className="flex justify-start items-start mt-5 text-pretty "
+                                  >
+                                    <div className="w-full flex justify-center item-center">
+                                      <img
+                                        src={result.image}
+                                        alt="food-picture"
+                                        className="w-full h-full max-w-5xl rounded-2xl mt-3"
+                                      />
+                                    </div>
+                                    <div className="h-full flex flex-col w-full items-center ml-3 text-center">
+                                      <p className="mb-5">Name</p>
+                                      <p className="text-sm w-full text-balance">
+                                        {result.name.toUpperCase()}
+                                      </p>
+                                    </div>
+                                    <div className="h-full flex flex-col w-full items-center">
+                                      <p className="mb-5">Level</p>
+                                      <p className="text-sm m-2">
+                                        {result.difficulty.toUpperCase()}
+                                      </p>
+                                    </div>
+                                    <div className="h-full flex flex-col w-full items-center">
+                                      <p className="mb-5">Rating</p>
+                                      <p>★{result.rating}</p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+                {/* {searchBy === "" ? (
+                  <></>
+                ) : (
+                  <>
+                    {searchBy === "Recipes" ? (
+                      <>
+                        <label className="form-control w-full max-w-xs mt-3">
+                          <input
+                            type="text"
+                            placeholder="Search Recipes"
+                            className="input input-bordered w-full max-w-xs"
+                            onChange={(ev) => {
+                              setSearch(ev.target.value);
+                            }}
+                          />
+                        </label>
+                        {search === "" ? (
+                          <></>
+                        ) : (
+                          <>
+                            {resultSearch.length === 0 ? (
+                              <>
+                                <div className="bg-gray-700 text-slate-200 w-11/12 p-5 text-center absolute top-56 mt-3 rounded-b-xl">
+                                  <p>Not Found :(</p>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="w-11/12  z-0 absolute top-56 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+                                  {resultSearch.map((result: detail) => {
+                                    return (
+                                      <>
+                                        <Link to="/detail">
+                                          <div
+                                            onClick={() => {
+                                              dispatch(getId(result.id));
+                                            }}
+                                            className="flex justify-start items-start mt-5 text-pretty "
+                                          >
+                                            <div className="w-full flex justify-center item-center">
+                                              <img
+                                                src={result.image}
+                                                alt="food-picture"
+                                                className="w-full h-full max-w-5xl rounded-2xl mt-3"
+                                              />
+                                            </div>
+                                            <div className="h-full flex flex-col w-full items-center ml-3 text-center">
+                                              <p className="mb-5">Name</p>
+                                              <p className="text-sm w-full text-balance">
+                                                {result.name.toUpperCase()}
+                                              </p>
+                                            </div>
+                                            <div className="h-full flex flex-col w-full items-center">
+                                              <p className="mb-5">Level</p>
+                                              <p className="text-sm m-2">
+                                                {result.difficulty.toUpperCase()}
+                                              </p>
+                                            </div>
+                                            <div className="h-full flex flex-col w-full items-center">
+                                              <p className="mb-5">Rating</p>
+                                              <p>★{result.rating}</p>
+                                            </div>
+                                          </div>
+                                        </Link>
+                                      </>
+                                    );
+                                  })}
+                                </div>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <select
+                          className="select select-bordered w-full mt-3"
+                          onChange={(ev) => {
+                            setLevel(ev.target.value);
+                          }}
+                        >
+                          <option disabled selected>
+                            Level
+                          </option>
+                          <option>Easy</option>
+                          <option>Medium</option>
+                        </select>
+                        {level === "" ? (
+                          <></>
+                        ) : (
+                          <>
+                            <div className="w-11/12  z-0 absolute top-56 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+                              {resultSearch.map((result: detail) => {
+                                return (
+                                  <>
+                                    <Link to="/detail">
+                                      <div
+                                        onClick={() => {
+                                          dispatch(getId(result.id));
+                                        }}
+                                        className="flex justify-start items-start mt-5 text-pretty "
+                                      >
+                                        <div className="w-full flex justify-center item-center">
+                                          <img
+                                            src={result.image}
+                                            alt="food-picture"
+                                            className="w-full h-full max-w-5xl rounded-2xl mt-3"
+                                          />
+                                        </div>
+                                        <div className="h-full flex flex-col w-full items-center ml-3 text-center">
+                                          <p className="mb-5">Name</p>
+                                          <p className="text-sm w-full text-balance">
+                                            {result.name.toUpperCase()}
+                                          </p>
+                                        </div>
+                                        <div className="h-full flex flex-col w-full items-center">
+                                          <p className="mb-5">Level</p>
+                                          <p className="text-sm m-2">
+                                            {result.difficulty.toUpperCase()}
+                                          </p>
+                                        </div>
+                                        <div className="h-full flex flex-col w-full items-center">
+                                          <p className="mb-5">Rating</p>
+                                          <p>★{result.rating}</p>
+                                        </div>
+                                      </div>
+                                    </Link>
+                                  </>
+                                );
+                              })}
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )} */}
                 {recipes.map((detail: detail) => {
                   return (
-                    <div
-                      onClick={() => {
-                        dispatch(getId(detail.id));
-                      }}
-                      className="w-10/12 flex justify-center items-center"
-                    >
-                      <Link to="/detail">
-                        <div className="flex justify-start items-start mt-8 text-pretty">
-                          <div className="w-full h-full flex justify-center item-center">
-                            <img
-                              src={detail.image}
-                              alt="food-picture"
-                              className="w-full h-full max-w-5xl rounded-2xl mt-3"
-                            />
+                    <>
+                      <div
+                        onClick={() => {
+                          dispatch(getId(detail.id));
+                        }}
+                        className="w-full flex justify-center items-center"
+                      >
+                        <Link to="/detail">
+                          <div className="flex justify-start items-start mt-5 text-pretty">
+                            <div className="w-full h-full flex justify-center item-center">
+                              <img
+                                src={detail.image}
+                                alt="food-picture"
+                                className="w-full h-full max-w-5xl rounded-2xl mt-3"
+                              />
+                            </div>
+                            <div className="h-full flex flex-col w-full items-center ml-3 text-center">
+                              <p className="mb-5">Name</p>
+                              <p className="text-sm w-full text-balance">
+                                {detail.name.toUpperCase()}
+                              </p>
+                            </div>
+                            <div className="h-full flex flex-col w-full items-center">
+                              <p className="mb-5">Level</p>
+                              <p className="text-sm m-2">
+                                {detail.difficulty.toUpperCase()}
+                              </p>
+                            </div>
+                            <div className="h-full flex flex-col w-full items-center">
+                              <p className="mb-5">Rating</p>
+                              <p>★{detail.rating}</p>
+                            </div>
                           </div>
-                          <div className="h-full flex flex-col w-full items-center ml-3 text-center">
-                            <p className="mb-5">Name</p>
-                            <p className="text-sm w-full text-balance">
-                              {detail.name.toUpperCase()}
-                            </p>
-                          </div>
-                          <div className="h-full flex flex-col w-full items-center">
-                            <p className="mb-5">Level</p>
-                            <p className="text-sm m-2">
-                              {detail.difficulty.toUpperCase()}
-                            </p>
-                          </div>
-                          <div className="h-full flex flex-col w-full items-center">
-                            <p className="mb-5">Rating</p>
-                            <p>★{detail.rating}</p>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
+                        </Link>
+                      </div>
+                    </>
                   );
                 })}
               </div>
+              <Footer></Footer>
             </>
           ) : (
-            <div className="h-fit flex flex-col">
+            <div className="w-full flex justify-start items-start h-full flex-col">
               <div className=" w-full flex justify-between items-center ">
                 <details className="dropdown ml-6">
-                  <summary className="m-1 btn bg-slate-400 text-slate-950">
-                    Sort By Cuisine
+                  <summary className="m-1 btn bg-slate-300 text-slate-950">
+                    Cuisine
                   </summary>
-                  <ul className="p-2 shadow menu dropdown-content z-[1] bg-slate-400 text-slate-950 rounded-box w-52">
+                  <ul className="p-2 shadow menu dropdown-content z-[1] bg-slate-300 text-slate-950 rounded-box w-52">
                     {cuisine.map((detail) => {
                       return (
                         <>
@@ -167,17 +425,17 @@ function App() {
                   {selectCuisine}
                 </p>
               </div>
-              <div className="w-full  flex flex-col items-center justify-center">
+              <div className="w-full  flex flex-col items-center justify-start h-full">
                 {filterRecipes.map((detail: detail) => {
                   return (
                     <div
                       onClick={() => {
                         dispatch(getId(detail.id));
                       }}
-                      className="w-10/12 flex justify-center items-center  "
+                      className="w-11/12 flex justify-center items-center  "
                     >
                       <Link to="/detail">
-                        <div className="flex justify-start items-start mt-8 text-pretty">
+                        <div className="flex justify-start items-start mt-5 text-pretty">
                           <div className="w-full h-full flex justify-center item-center">
                             <img
                               src={detail.image}
@@ -186,7 +444,7 @@ function App() {
                             />
                           </div>
                           <div className="h-full flex flex-col w-full items-center ml-3 text-center">
-                            <p className="mb-5">Name</p>
+                            <p className="mb-2">Name</p>
                             <p className="text-sm w-full text-balance">
                               {detail.name.toUpperCase()}
                             </p>
@@ -207,6 +465,7 @@ function App() {
                   );
                 })}
               </div>
+              <Footer></Footer>
             </div>
           )}
         </>
@@ -215,7 +474,6 @@ function App() {
           <HomeXl></HomeXl>
         </>
       )}
-      <Footer></Footer>
     </div>
   );
 }

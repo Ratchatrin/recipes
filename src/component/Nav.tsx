@@ -12,7 +12,7 @@ function Nav() {
       {windowWidth < 1024 ? (
         <>
           <div className="sticky top-0 w-full ">
-            <Link to="/recipe">
+            <Link to="/">
               <div className="navbar bg-base-100 ">
                 <div className="flex-1 flex justify-center">
                   <a className="btn btn-ghost text-2xl">Cooking Buddy</a>
@@ -24,7 +24,7 @@ function Nav() {
       ) : (
         <>
           <div className="sticky top-0 w-full mt-8">
-            <Link to="/recipe">
+            <Link to="/">
               <div className="navbar bg-base-100 ">
                 <div className="flex-1 flex justify-center">
                   <a className="btn btn-ghost text-5xl">Cooking Buddy</a>
