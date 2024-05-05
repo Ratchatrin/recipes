@@ -34,7 +34,9 @@ function Fav() {
   window.addEventListener("resize", updateWindowWidth);
   useEffect(() => {
     const local: string | null = localStorage.getItem("recipes");
-    setFav(JSON.parse(local));
+    if (local !== null) {
+      setFav(JSON.parse(local));
+    }
   }, []);
   return (
     <>
