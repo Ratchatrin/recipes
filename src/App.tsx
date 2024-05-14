@@ -78,13 +78,13 @@ function App() {
   useEffect(() => {
     setResultSearch([]);
     recipes.map((detail: detail) => {
-      detail.tags.map((tag) => {
-        if (tag.toLocaleLowerCase() === search) {
-          setResultSearch((result) => {
-            return [...result, detail];
-          });
-        }
-      });
+      if (
+        detail.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      ) {
+        setResultSearch((prev) => {
+          return [...prev, detail];
+        });
+      }
     });
   }, [recipes, search]);
   return (
@@ -132,11 +132,11 @@ function App() {
                     </button>
                   </Link>
                 </div>
-                <label className="form-control w-full max-w-xs mt-3">
+                <label className="form-control w-full max-w-md mt-3">
                   <input
                     type="text"
                     placeholder="Search Recipes"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-md"
                     onChange={(ev) => {
                       setSearch(ev.target.value);
                     }}
@@ -154,7 +154,7 @@ function App() {
                       </>
                     ) : (
                       <>
-                        <div className="w-11/12  z-0 absolute top-40 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+                        <div className="w-11/12 max-w-md z-[2] absolute top-40 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
                           {resultSearch.map((result: detail) => {
                             return (
                               <>

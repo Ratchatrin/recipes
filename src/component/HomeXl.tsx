@@ -95,13 +95,13 @@ function HomeXl() {
   useEffect(() => {
     setResultSearch([]);
     recipes.map((detail: detail) => {
-      detail.tags.map((tag) => {
-        if (tag.toLocaleLowerCase() === search) {
-          setResultSearch((result) => {
-            return [...result, detail];
-          });
-        }
-      });
+      if (
+        detail.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      ) {
+        setResultSearch((prev) => {
+          return [...prev, detail];
+        });
+      }
     });
   }, [recipes, search]);
   return (
