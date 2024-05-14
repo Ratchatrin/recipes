@@ -8,7 +8,7 @@ interface detail {
   id: number;
   image: string;
   name: string;
-  rating: string;
+  rating: number;
   difficulty: string;
   cuisine: string;
   caloriesPerServing: string;
@@ -29,6 +29,8 @@ function HomeXl() {
   const [search, setSearch] = useState<string>("");
   const [addComplete, setAddComplete] = useState(false);
   const [exist, setExist] = useState(false);
+  const [ratingUp, setRatingUp] = useState(false);
+  console.log(ratingUp);
   const getData = async () => {
     try {
       const data = await axios.get("https://dummyjson.com/recipes");
@@ -74,6 +76,18 @@ function HomeXl() {
         setExist(false);
       }, 1000);
     }
+  };
+  const sortRatingUp = () => {
+    recipes.sort((a: detail, b: detail) => {
+      return b.rating - a.rating;
+    });
+    setRatingUp(true);
+  };
+  const sortRatingDown = () => {
+    recipes.sort((a: detail, b: detail) => {
+      return a.rating - b.rating;
+    });
+    setRatingUp(false);
   };
   useEffect(() => {
     getData();
@@ -344,7 +358,7 @@ function HomeXl() {
                                       }}
                                     >
                                       <span className="text-slate-800">
-                                        Complete
+                                        &#x2714; Complete
                                       </span>
                                     </button>
                                   </>
@@ -359,6 +373,19 @@ function HomeXl() {
                 )}
               </>
             )}
+            <div className="w-full text-center mt-5">
+              <details className="dropdown">
+                <summary className="m-1 btn">Sort By Rating</summary>
+                <ul className="p-2 shadow menu dropdown-content z-[2] bg-base-100 rounded-box w-52">
+                  <li onClick={sortRatingUp}>
+                    <a> Rating &uarr;</a>
+                  </li>
+                  <li onClick={sortRatingDown}>
+                    <a>Rating &darr;</a>
+                  </li>
+                </ul>
+              </details>
+            </div>
             {recipes.map((detail: detail) => {
               return (
                 <>
@@ -540,7 +567,9 @@ function HomeXl() {
                               });
                             }}
                           >
-                            <span className="text-slate-800">Complete</span>
+                            <span className="text-slate-800">
+                              &#x2714; Complete
+                            </span>
                           </button>
                         </>
                       )}
@@ -771,7 +800,9 @@ function HomeXl() {
                                 });
                               }}
                             >
-                              <span className="text-slate-800">Complete</span>
+                              <span className="text-slate-800">
+                                &#x2714; Complete
+                              </span>
                             </button>
                           </>
                         )}
