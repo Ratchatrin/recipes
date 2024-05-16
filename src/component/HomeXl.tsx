@@ -234,9 +234,9 @@ function HomeXl() {
                                     </>
                                   );
                                 })}
-                                <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                                <div className="collapse bg-slate-200 mt-3 text-slate-950">
                                   <input type="checkbox" />
-                                  <div className="collapse-title text-xl font-medium">
+                                  <div className="collapse-title text-xl font-bold">
                                     Ingredients
                                   </div>
                                   <div className="collapse-content">
@@ -249,9 +249,9 @@ function HomeXl() {
                                     })}
                                   </div>
                                 </div>
-                                <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                                <div className="collapse bg-slate-200 mt-3 text-slate-950">
                                   <input type="checkbox" />
-                                  <div className="collapse-title text-xl font-medium">
+                                  <div className="collapse-title text-xl font-bold">
                                     instructions
                                   </div>
                                   <div className="collapse-content">
@@ -449,9 +449,9 @@ function HomeXl() {
                           </>
                         );
                       })}
-                      <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                      <div className="collapse bg-slate-200 mt-3 text-slate-950">
                         <input type="checkbox" />
-                        <div className="collapse-title text-xl font-medium">
+                        <div className="collapse-title text-xl font-bold">
                           Ingredients
                         </div>
                         <div className="collapse-content">
@@ -464,9 +464,9 @@ function HomeXl() {
                           })}
                         </div>
                       </div>
-                      <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                      <div className="collapse bg-slate-200 mt-3 text-slate-950">
                         <input type="checkbox" />
-                        <div className="collapse-title text-xl font-medium">
+                        <div className="collapse-title text-xl font-bold">
                           instructions
                         </div>
                         <div className="collapse-content">
@@ -682,9 +682,9 @@ function HomeXl() {
                             </>
                           );
                         })}
-                        <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                        <div className="collapse bg-slate-200 mt-3 text-slate-950">
                           <input type="checkbox" />
-                          <div className="collapse-title text-xl font-medium">
+                          <div className="collapse-title text-xl font-bold">
                             Ingredients
                           </div>
                           <div className="collapse-content">
@@ -697,9 +697,9 @@ function HomeXl() {
                             })}
                           </div>
                         </div>
-                        <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                        <div className="collapse bg-slate-200 mt-3 text-slate-950">
                           <input type="checkbox" />
-                          <div className="collapse-title text-xl font-medium">
+                          <div className="collapse-title text-xl font-bold">
                             instructions
                           </div>
                           <div className="collapse-content">
