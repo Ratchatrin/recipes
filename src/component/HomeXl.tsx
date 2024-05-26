@@ -169,13 +169,13 @@ function HomeXl() {
                   </>
                 ) : (
                   <>
-                    <div className="w-4/6 max-w-lg z-[2] absolute top-52 mt-4 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+                    <div className="w-4/6 max-w-lg z-[2] absolute top-52 mt-4 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl ">
                       {resultSearch.map((detail: detail) => {
                         return (
                           <>
                             <div className="collapse bg-base-200 max-w-lg mt-10">
                               <input type="checkbox" />
-                              <div className="collapse-title text-xl font-medium h-full">
+                              <div className="collapse-title text-xl font-medium h-full bg-gray-500 ">
                                 <div className="flex justify-between items-center w-full h-full mt-8 text-pretty">
                                   <div className="w-full h-full">
                                     <img
