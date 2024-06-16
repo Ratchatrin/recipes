@@ -82,7 +82,7 @@ function HomeXl() {
     setResultSearch([]);
     recipes.map((detail: detail) => {
       detail.tags.map((tag) => {
-        if (tag.toLocaleLowerCase() === search) {
+        if (tag.toLocaleLowerCase().includes(search)) {
           setResultSearch((result) => {
             return [...result, detail];
           });
@@ -159,7 +159,7 @@ function HomeXl() {
                       {resultSearch.map((detail: detail) => {
                         return (
                           <>
-                            <div className="collapse bg-base-200 max-w-lg mt-10">
+                            <div className="collapse bg-slate-900 max-w-lg mt-10">
                               <input type="checkbox" />
                               <div className="collapse-title text-xl font-medium h-full">
                                 <div className="flex justify-between items-center w-full h-full mt-8 text-pretty">

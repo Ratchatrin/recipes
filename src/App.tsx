@@ -29,9 +29,7 @@ function App() {
   const [filterRecipes, setFilterRecipes] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState<string>("");
-  // const [searchBy, setSearchBy] = useState<string>("");
   const [resultSearch, setResultSearch] = useState<detail[]>([]);
-  // const [level, setLevel] = useState<string>("");
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -66,7 +64,7 @@ function App() {
     setResultSearch([]);
     recipes.map((detail: detail) => {
       detail.tags.map((tag) => {
-        if (tag.toLocaleLowerCase() === search) {
+        if (tag.toLocaleLowerCase().includes(search)) {
           setResultSearch((result) => {
             return [...result, detail];
           });
@@ -74,16 +72,6 @@ function App() {
       });
     });
   }, [recipes, search]);
-  // useEffect(() => {
-  //   setResultSearch([]);
-  //   recipes.map((detail: detail) => {
-  //     if (detail.difficulty === level) {
-  //       setResultSearch((result) => {
-  //         return [...result, detail];
-  //       });
-  //     }
-  //   });
-  // }, [level, recipes]);
   return (
     <div className="h-full flex flex-col justify-start items-center">
       {windowWidth < 1024 ? (
@@ -129,26 +117,6 @@ function App() {
                     </button>
                   </Link>
                 </div>
-                {/* <div>
-                  <label className="form-control w-full">
-                    <div className="label">
-                      <span className="label-text"></span>
-                    </div>
-                    <select
-                      className="select select-bordered"
-                      onChange={(ev) => {
-                        setSearchBy(ev.target.value);
-                        setResultSearch([]);
-                      }}
-                    >
-                      <option selected disabled>
-                        Search By
-                      </option>
-                      <option>Recipes</option>
-                      <option>Level</option>
-                    </select>
-                  </label>
-                </div> */}
                 <label className="form-control w-full max-w-xs mt-3">
                   <input
                     type="text"
@@ -215,143 +183,7 @@ function App() {
                     )}
                   </>
                 )}
-                {/* {searchBy === "" ? (
-                  <></>
-                ) : (
-                  <>
-                    {searchBy === "Recipes" ? (
-                      <>
-                        <label className="form-control w-full max-w-xs mt-3">
-                          <input
-                            type="text"
-                            placeholder="Search Recipes"
-                            className="input input-bordered w-full max-w-xs"
-                            onChange={(ev) => {
-                              setSearch(ev.target.value);
-                            }}
-                          />
-                        </label>
-                        {search === "" ? (
-                          <></>
-                        ) : (
-                          <>
-                            {resultSearch.length === 0 ? (
-                              <>
-                                <div className="bg-gray-700 text-slate-200 w-11/12 p-5 text-center absolute top-56 mt-3 rounded-b-xl">
-                                  <p>Not Found :(</p>
-                                </div>
-                              </>
-                            ) : (
-                              <>
-                                <div className="w-11/12  z-0 absolute top-56 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
-                                  {resultSearch.map((result: detail) => {
-                                    return (
-                                      <>
-                                        <Link to="/detail">
-                                          <div
-                                            onClick={() => {
-                                              dispatch(getId(result.id));
-                                            }}
-                                            className="flex justify-start items-start mt-5 text-pretty "
-                                          >
-                                            <div className="w-full flex justify-center item-center">
-                                              <img
-                                                src={result.image}
-                                                alt="food-picture"
-                                                className="w-full h-full max-w-5xl rounded-2xl mt-3"
-                                              />
-                                            </div>
-                                            <div className="h-full flex flex-col w-full items-center ml-3 text-center">
-                                              <p className="mb-5">Name</p>
-                                              <p className="text-sm w-full text-balance">
-                                                {result.name.toUpperCase()}
-                                              </p>
-                                            </div>
-                                            <div className="h-full flex flex-col w-full items-center">
-                                              <p className="mb-5">Level</p>
-                                              <p className="text-sm m-2">
-                                                {result.difficulty.toUpperCase()}
-                                              </p>
-                                            </div>
-                                            <div className="h-full flex flex-col w-full items-center">
-                                              <p className="mb-5">Rating</p>
-                                              <p>★{result.rating}</p>
-                                            </div>
-                                          </div>
-                                        </Link>
-                                      </>
-                                    );
-                                  })}
-                                </div>
-                              </>
-                            )}
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <select
-                          className="select select-bordered w-full mt-3"
-                          onChange={(ev) => {
-                            setLevel(ev.target.value);
-                          }}
-                        >
-                          <option disabled selected>
-                            Level
-                          </option>
-                          <option>Easy</option>
-                          <option>Medium</option>
-                        </select>
-                        {level === "" ? (
-                          <></>
-                        ) : (
-                          <>
-                            <div className="w-11/12  z-0 absolute top-56 mt-3 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
-                              {resultSearch.map((result: detail) => {
-                                return (
-                                  <>
-                                    <Link to="/detail">
-                                      <div
-                                        onClick={() => {
-                                          dispatch(getId(result.id));
-                                        }}
-                                        className="flex justify-start items-start mt-5 text-pretty "
-                                      >
-                                        <div className="w-full flex justify-center item-center">
-                                          <img
-                                            src={result.image}
-                                            alt="food-picture"
-                                            className="w-full h-full max-w-5xl rounded-2xl mt-3"
-                                          />
-                                        </div>
-                                        <div className="h-full flex flex-col w-full items-center ml-3 text-center">
-                                          <p className="mb-5">Name</p>
-                                          <p className="text-sm w-full text-balance">
-                                            {result.name.toUpperCase()}
-                                          </p>
-                                        </div>
-                                        <div className="h-full flex flex-col w-full items-center">
-                                          <p className="mb-5">Level</p>
-                                          <p className="text-sm m-2">
-                                            {result.difficulty.toUpperCase()}
-                                          </p>
-                                        </div>
-                                        <div className="h-full flex flex-col w-full items-center">
-                                          <p className="mb-5">Rating</p>
-                                          <p>★{result.rating}</p>
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  </>
-                                );
-                              })}
-                            </div>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )} */}
+
                 {recipes.map((detail: detail) => {
                   return (
                     <>
