@@ -220,7 +220,7 @@ function HomeXl() {
                                     </>
                                   );
                                 })}
-                                <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                                <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                                   <input type="checkbox" />
                                   <div className="collapse-title text-xl font-medium">
                                     Ingredients
@@ -235,7 +235,7 @@ function HomeXl() {
                                     })}
                                   </div>
                                 </div>
-                                <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                                <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                                   <input type="checkbox" />
                                   <div className="collapse-title text-xl font-medium">
                                     instructions
@@ -422,7 +422,7 @@ function HomeXl() {
                           </>
                         );
                       })}
-                      <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                      <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                         <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                           Ingredients
@@ -437,7 +437,7 @@ function HomeXl() {
                           })}
                         </div>
                       </div>
-                      <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                      <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                         <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                           instructions
@@ -653,7 +653,7 @@ function HomeXl() {
                             </>
                           );
                         })}
-                        <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                        <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                           <input type="checkbox" />
                           <div className="collapse-title text-xl font-medium">
                             Ingredients
@@ -668,7 +668,7 @@ function HomeXl() {
                             })}
                           </div>
                         </div>
-                        <div className="collapse bg-base-200 mt-3 text-zinc-200">
+                        <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                           <input type="checkbox" />
                           <div className="collapse-title text-xl font-medium">
                             instructions
