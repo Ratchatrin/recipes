@@ -149,11 +149,7 @@ function FoodDetail() {
                       });
                     }}
                   >
-<<<<<<< HEAD
                     <span className="text-slate-800">Complete</span>
-=======
-                    <span className="text-slate-800"> &#x2714; Complete</span>
->>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                   </button>
                 </>
               )}

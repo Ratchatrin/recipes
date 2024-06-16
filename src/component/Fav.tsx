@@ -68,11 +68,7 @@ function Fav() {
                         <div className="flex items-start justify-center h-full">
                           <div className="flex justify-center items-center">
                             <button
-<<<<<<< HEAD
                               className=" bg-red-600  mt-12 p-2 rounded-md"
-=======
-                              className=" bg-red-600 p-2 rounded-md"
->>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                               onClick={() => {
                                 deleteFav(detail.id);
                               }}
