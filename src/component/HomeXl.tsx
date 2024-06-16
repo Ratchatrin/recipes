@@ -8,7 +8,11 @@ interface detail {
   id: number;
   image: string;
   name: string;
+<<<<<<< HEAD
   rating: string;
+=======
+  rating: number;
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
   difficulty: string;
   cuisine: string;
   caloriesPerServing: string;
@@ -29,6 +33,11 @@ function HomeXl() {
   const [search, setSearch] = useState<string>("");
   const [addComplete, setAddComplete] = useState(false);
   const [exist, setExist] = useState(false);
+<<<<<<< HEAD
+=======
+  const [ratingUp, setRatingUp] = useState(false);
+  console.log(ratingUp);
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
   const getData = async () => {
     try {
       const data = await axios.get("https://dummyjson.com/recipes");
@@ -75,12 +84,28 @@ function HomeXl() {
       }, 1000);
     }
   };
+<<<<<<< HEAD
+=======
+  const sortRatingUp = () => {
+    recipes.sort((a: detail, b: detail) => {
+      return b.rating - a.rating;
+    });
+    setRatingUp(true);
+  };
+  const sortRatingDown = () => {
+    recipes.sort((a: detail, b: detail) => {
+      return a.rating - b.rating;
+    });
+    setRatingUp(false);
+  };
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
   useEffect(() => {
     getData();
   }, []);
   useEffect(() => {
     setResultSearch([]);
     recipes.map((detail: detail) => {
+<<<<<<< HEAD
       detail.tags.map((tag) => {
         if (tag.toLocaleLowerCase() === search) {
           setResultSearch((result) => {
@@ -88,6 +113,15 @@ function HomeXl() {
           });
         }
       });
+=======
+      if (
+        detail.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      ) {
+        setResultSearch((prev) => {
+          return [...prev, detail];
+        });
+      }
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
     });
   }, [recipes, search]);
   return (
@@ -155,13 +189,21 @@ function HomeXl() {
                   </>
                 ) : (
                   <>
+<<<<<<< HEAD
                     <div className="w-4/6 max-w-lg z-[2] absolute top-52 mt-4 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl">
+=======
+                    <div className="w-4/6 max-w-lg z-[2] absolute top-52 mt-4 flex flex-col  bg-gray-700 text-slate-200 p-2 pb-5 rounded-b-xl ">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                       {resultSearch.map((detail: detail) => {
                         return (
                           <>
                             <div className="collapse bg-base-200 max-w-lg mt-10">
                               <input type="checkbox" />
+<<<<<<< HEAD
                               <div className="collapse-title text-xl font-medium h-full">
+=======
+                              <div className="collapse-title text-xl font-medium h-full bg-gray-500 ">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                                 <div className="flex justify-between items-center w-full h-full mt-8 text-pretty">
                                   <div className="w-full h-full">
                                     <img
@@ -220,9 +262,15 @@ function HomeXl() {
                                     </>
                                   );
                                 })}
+<<<<<<< HEAD
                                 <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                                   <input type="checkbox" />
                                   <div className="collapse-title text-xl font-medium">
+=======
+                                <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                                  <input type="checkbox" />
+                                  <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                                     Ingredients
                                   </div>
                                   <div className="collapse-content">
@@ -235,9 +283,15 @@ function HomeXl() {
                                     })}
                                   </div>
                                 </div>
+<<<<<<< HEAD
                                 <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                                   <input type="checkbox" />
                                   <div className="collapse-title text-xl font-medium">
+=======
+                                <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                                  <input type="checkbox" />
+                                  <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                                     instructions
                                   </div>
                                   <div className="collapse-content">
@@ -344,7 +398,11 @@ function HomeXl() {
                                       }}
                                     >
                                       <span className="text-slate-800">
+<<<<<<< HEAD
                                         Complete
+=======
+                                        &#x2714; Complete
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                                       </span>
                                     </button>
                                   </>
@@ -359,6 +417,22 @@ function HomeXl() {
                 )}
               </>
             )}
+<<<<<<< HEAD
+=======
+            <div className="w-full text-center mt-5">
+              <details className="dropdown">
+                <summary className="m-1 btn">Sort By Rating</summary>
+                <ul className="p-2 shadow menu dropdown-content z-[2] bg-base-100 rounded-box w-52">
+                  <li onClick={sortRatingUp}>
+                    <a> Rating &uarr;</a>
+                  </li>
+                  <li onClick={sortRatingDown}>
+                    <a>Rating &darr;</a>
+                  </li>
+                </ul>
+              </details>
+            </div>
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
             {recipes.map((detail: detail) => {
               return (
                 <>
@@ -422,9 +496,15 @@ function HomeXl() {
                           </>
                         );
                       })}
+<<<<<<< HEAD
                       <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                         <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
+=======
+                      <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                        <input type="checkbox" />
+                        <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                           Ingredients
                         </div>
                         <div className="collapse-content">
@@ -437,9 +517,15 @@ function HomeXl() {
                           })}
                         </div>
                       </div>
+<<<<<<< HEAD
                       <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                         <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
+=======
+                      <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                        <input type="checkbox" />
+                        <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                           instructions
                         </div>
                         <div className="collapse-content">
@@ -540,7 +626,13 @@ function HomeXl() {
                               });
                             }}
                           >
+<<<<<<< HEAD
                             <span className="text-slate-800">Complete</span>
+=======
+                            <span className="text-slate-800">
+                              &#x2714; Complete
+                            </span>
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                           </button>
                         </>
                       )}
@@ -653,9 +745,15 @@ function HomeXl() {
                             </>
                           );
                         })}
+<<<<<<< HEAD
                         <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                           <input type="checkbox" />
                           <div className="collapse-title text-xl font-medium">
+=======
+                        <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                          <input type="checkbox" />
+                          <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                             Ingredients
                           </div>
                           <div className="collapse-content">
@@ -668,9 +766,15 @@ function HomeXl() {
                             })}
                           </div>
                         </div>
+<<<<<<< HEAD
                         <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
                           <input type="checkbox" />
                           <div className="collapse-title text-xl font-medium">
+=======
+                        <div className="collapse bg-slate-200 mt-3 text-slate-950">
+                          <input type="checkbox" />
+                          <div className="collapse-title text-xl font-bold">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                             instructions
                           </div>
                           <div className="collapse-content">
@@ -771,7 +875,13 @@ function HomeXl() {
                                 });
                               }}
                             >
+<<<<<<< HEAD
                               <span className="text-slate-800">Complete</span>
+=======
+                              <span className="text-slate-800">
+                                &#x2714; Complete
+                              </span>
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                             </button>
                           </>
                         )}

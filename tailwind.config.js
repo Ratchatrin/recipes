@@ -6,4 +6,10 @@ export default {
     extend: {},
   },
   plugins: [daisyui],
+<<<<<<< HEAD
+=======
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
 };

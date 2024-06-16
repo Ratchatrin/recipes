@@ -1,5 +1,8 @@
 {
+<<<<<<< HEAD
   "homepage": "http://ratchatrin.github.io/recipes",
+=======
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
   "name": "frontend",
   "private": true,
   "version": "0.0.0",

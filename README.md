@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -28,3 +29,20 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+=======
+Food Recipes
+
+Description
+Food Recipes is a culinary website that provides users with 30 easy-to-follow recipes. Each recipe includes detailed instructions and ingredient lists,
+making it simple for users to cook delicious meals at home. The site is designed with a clean, intuitive interface for an enhanced user experience.
+
+Features
+
+Recipe Listings: Browse through 30 delicious recipes with detailed instructions and ingredients.
+User-Friendly Interface: Enjoy a clean and intuitive design that makes navigation and recipe discovery simple.
+Responsive Design: Access recipes easily on desktops, tablets, and mobile devices.
+
+Technologies Used
+
+Front-End: React, Tailwind, CSSDaisyUI
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de

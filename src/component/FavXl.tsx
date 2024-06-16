@@ -138,7 +138,11 @@ function FavXl() {
                               </>
                             );
                           })}
+<<<<<<< HEAD
                           <div className="collapse bg-zinc-900 mt-3 text-zinc-200 ">
+=======
+                          <div className="collapse bg-base-200 mt-3 text-zinc-200">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                             <input type="checkbox" />
                             <div className="collapse-title text-xl font-medium">
                               Ingredients
@@ -153,7 +157,11 @@ function FavXl() {
                               })}
                             </div>
                           </div>
+<<<<<<< HEAD
                           <div className="collapse bg-zinc-900 mt-3 text-zinc-200">
+=======
+                          <div className="collapse bg-base-200 mt-3 text-zinc-200">
+>>>>>>> 30ca14346d1338a7405e92291aeadd557d3661de
                             <input type="checkbox" />
                             <div className="collapse-title text-xl font-medium">
                               instructions
